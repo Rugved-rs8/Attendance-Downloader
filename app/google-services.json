@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "799896398177",
+    "project_id": "attendencedownloader",
+    "storage_bucket": "attendencedownloader.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799896398177:android:dad50d5da051f26956bd20",
+        "android_client_info": {
+          "package_name": "com.example.AttendenceDownloader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799896398177-6aks5352elkb0ltkt22ppac0l3704dfs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEHS_l9RCQxGNMu971oGEVW9XmzWuLNh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799896398177-6aks5352elkb0ltkt22ppac0l3704dfs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
