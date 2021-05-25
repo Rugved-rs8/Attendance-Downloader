@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ClassInfo implements Parcelable {
-    private String className, subjectName, noOfStudents;
+    private final String className;
+    private final String subjectName;
+    private final String noOfStudents;
 
     public ClassInfo(String className, String subjectName, String noOfStudents) {
         this.className = className;
@@ -34,24 +36,12 @@ public class ClassInfo implements Parcelable {
         return className;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
     public String getNoOfStudents() {
         return noOfStudents;
     }
 
-    public void setNoOfStudents(String noOfStudents) {
-        this.noOfStudents = noOfStudents;
-    }
-
     public String getSubjectName() {
         return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
     }
 
     @Override

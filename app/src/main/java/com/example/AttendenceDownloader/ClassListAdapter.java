@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 public class ClassListAdapter extends ArrayAdapter<ClassInfo> {
-    private Context mContext;
+    private final Context mContext;
     int mResource;
 
     public ClassListAdapter(@NonNull Context context, int resource, @NonNull List<ClassInfo> objects) {
@@ -27,7 +27,6 @@ public class ClassListAdapter extends ArrayAdapter<ClassInfo> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String classname = getItem(position).getClassName();
         String subname = getItem(position).getSubjectName();
-        String nos = getItem(position).getNoOfStudents();
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
         TextView tvcn = convertView.findViewById(R.id.heading);

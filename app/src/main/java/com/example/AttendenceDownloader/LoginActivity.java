@@ -1,6 +1,5 @@
 package com.example.AttendenceDownloader;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,9 +8,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +35,10 @@ public class LoginActivity extends AppCompatActivity implements ClassDetailsDial
         //Load data
         loadData();
 
-        classLview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(LoginActivity.this, RollCall.class);
-                intent.putExtra("Example Item", classList.get(position));
-                startActivity(intent);
-            }
+        classLview.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(LoginActivity.this, RollCall.class);
+            intent.putExtra("Example Item", classList.get(position));
+            startActivity(intent);
         });
 
         classLview.setOnItemLongClickListener((AdapterView<?> parent, View view, int position, long id) -> {
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements ClassDetailsDial
     public void applyTexts(String cn, String sn, String nos) {
         ClassInfo obj = new ClassInfo(cn, sn, nos);
         classList.add(obj);
-        Toast.makeText(this, "Class: "+cn+"\nSubject: "+sn+"\nnos: "+nos, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Class: "+cn+"\nSubject: "+sn+"\nNo. of Students: "+nos, Toast.LENGTH_LONG).show();
 
         //Save Data
         saveData();
