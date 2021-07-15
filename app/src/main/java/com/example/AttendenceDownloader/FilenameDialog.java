@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 public class FilenameDialog extends AppCompatDialogFragment {
 
     private EditText fileNameEditText;
+    private EditText columnNameEditText;
     private FilenameDialogListener listener;
 
     @NonNull
@@ -24,18 +24,20 @@ public class FilenameDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.file_name_dialog, null);
-        builder.setView(view).setTitle("Create File")
-                .setPositiveButton("Create", (dialog, id) -> {
+        builder.setView(view).setTitle("Import the Names Column from File")
+                .setPositiveButton("Import", (dialog, id) -> {
 
                     String filename = fileNameEditText.getText().toString();
-                    Log.d("  Filename  ", filename);
-                    listener.applyFilename(filename);
+                    String columnname = columnNameEditText.getText().toString();
+
+                    listener.applyFilename(filename, columnname);
                 })
                 .setNegativeButton("Cancel", (dialog, id) -> {
 
                 });
 
         fileNameEditText = view.findViewById(R.id.fileNameEditText);
+        columnNameEditText = view.findViewById(R.id.columnNameEditText);
         return builder.create();
 
        }
@@ -51,6 +53,6 @@ public class FilenameDialog extends AppCompatDialogFragment {
     }
 
     public interface FilenameDialogListener {
-        void applyFilename(String fn);
+        void applyFilename(String fn, String cn);
     }
 }

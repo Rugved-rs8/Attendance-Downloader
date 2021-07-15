@@ -6,7 +6,32 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_files">FilesActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="rs8_production">rs8 Production</string>
+    <string name="todo">TODO</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="enter_registered_email">Enter Registered Email</string>
+    <string name="submit">Submit</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="school_college_name">School/College Name</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="class_name">Class Name</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="number_of_students">Number of Students</string>
+    <string name="enter_file_name">Enter File Name</string>
+    <string name="enter_name_of_the_column_to_be_imported">Enter Name of the column to be imported</string>
+    <string name="student_name">Student Name</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="add_classrooms">Add Classrooms</string>
+    <string name="made_in_india">Made in India</string>
 </resources>

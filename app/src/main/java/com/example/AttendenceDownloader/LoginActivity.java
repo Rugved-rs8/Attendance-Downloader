@@ -1,17 +1,28 @@
 package com.example.AttendenceDownloader;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -20,20 +31,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements ClassDetailsDialog.ClassDetailsDialogListener {
-    ListView classLview;
-    List<ClassInfo> classList;
-    ClassListAdapter adapter;
+    private ListView classLview;
+    private List<ClassInfo> classList;
+    private ClassListAdapter adapter;
+    private final String[] permissionsArr = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_EXTERNAL_STORAGE"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login2);
+         setContentView(R.layout.activity_login2);
+         setTitle("Home");
 
-        classLview = findViewById(R.id.classLview);
-        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
+         TextView classroomsTextView = findViewById(R.id.classroomsTextView);
+         classLview = findViewById(R.id.classLview);
+         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 
         //Load data
         loadData();
+
+        if(classList.isEmpty())classroomsTextView.setVisibility(View.VISIBLE);
 
         classLview.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(LoginActivity.this, RollCall.class);
@@ -52,13 +68,47 @@ public class LoginActivity extends AppCompatActivity implements ClassDetailsDial
                         saveData();
                     })
                     .setNegativeButton("Cancel", null).show();
+            if(classList.isEmpty())classroomsTextView.setVisibility(View.VISIBLE);
             return true;
         });
 
         floatingActionButton.setOnClickListener(view -> {
             ClassDetailsDialog obj = new ClassDetailsDialog();
             obj.show(getSupportFragmentManager(), "Create Class");
+            classroomsTextView.setVisibility(View.GONE);
         });
+
+        //  Runtime Premissions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissionsArr, 80);
+        }
+    }
+
+    //    Menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.about:
+                startActivity(new Intent(LoginActivity.this, AboutActivity.class));
+                return true;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -95,5 +145,24 @@ public class LoginActivity extends AppCompatActivity implements ClassDetailsDial
         }
         adapter = new ClassListAdapter(this, R.layout.list_item, classList);
         classLview.setAdapter(adapter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == 80){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.d( "Permissions Result: ", "   GRANTED!!!  ");
+            }
+            else {
+                Log.d( "Permissions Result: ", "   DENIED!!!  ");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(permissionsArr, 80);
+                    Toast.makeText(this, "Permission is needed to download your classes attendance as a .csv file.", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }
