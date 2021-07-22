@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.17000002"
-        android:autofillHints="" />
+        android:autofillHints="yes" />
 
     <EditText
         android:id="@+id/signUpEmailEditText"
@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         app:layout_constraintVertical_bias="0.050000012"
-        android:autofillHints="" />
+        android:autofillHints="yes" />
 
     <EditText
         android:id="@+id/collegeNameEditText"
@@ -48,7 +48,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpEmailEditText"
         app:layout_constraintVertical_bias="0.050000012"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="yes"
+        android:autofillHints="yes" />
 
     <EditText
         android:id="@+id/signUpPasswordEditText"
@@ -62,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/collegeNameEditText"
         app:layout_constraintVertical_bias="0.050000012"
-        android:autofillHints="" />
+        android:autofillHints="no" />
 
     <EditText
         android:id="@+id/confirmPasswordEditText"
@@ -76,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpPasswordEditText"
         app:layout_constraintVertical_bias="0.050000012"
-        android:autofillHints="" />
+        android:autofillHints="yes" />
 
     <Button
         android:id="@+id/createAccountButton"
